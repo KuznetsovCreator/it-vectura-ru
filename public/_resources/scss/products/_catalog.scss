@@ -1,0 +1,139 @@
+.catalog {
+
+	// Main container
+	&__content {
+		@include grid(1fr, auto);
+		@include gap(100px, 0);
+	}
+
+	// Product items
+	&__item {
+		@include grid(1.3fr auto, auto);
+		@include gap(0, 50px);
+	}
+
+	&__item-content {
+		@include flex(flex-start, flex-start, column);
+		@include gap(30px, 0);
+	}
+
+	&__item-pic {
+		@include flex(center, center, column);
+		width: 450px;
+
+		img {
+			height: 350px;
+			max-width: 100%;
+			object-fit: contain;
+		}
+	}
+
+	// Item components
+	&__title {
+		@include flex(flex-start, flex-start, column);
+		@include gap(5px, 0);
+
+		width: 100%;
+	}
+
+	&__points {
+		@include flex(flex-start, flex-start, column);
+		@include gap(20px, 0);
+
+		&>p {
+			padding-left: 35px;
+			position: relative;
+
+			&::before {
+				@include pseudo;
+				top: 3px;
+				left: 0;
+
+				width: 15px;
+				height: 15px;
+
+				border-radius: 50%;
+			}
+
+			&.red {
+				&::before {
+					background: #FF4733;
+				}
+			}
+
+			&.yel {
+				&::before {
+					background: #FFCB70;
+				}
+			}
+
+			&.orn {
+				&::before {
+					background: #FF574C;
+				}
+			}
+
+			&.blu {
+				&::before {
+					background: #497088;
+				}
+			}
+		}
+	}
+
+	&__button {
+		max-width: 330px;
+		width: 100%;
+	}
+
+	@media (max-width: $xl) {
+		&__item-pic {
+			width: 350px;
+
+			img {
+				height: auto;
+			}
+		}
+	}
+
+	@media (max-width: $lg) {
+		&__item-pic {
+			width: 250px;
+
+			img {
+				height: auto;
+			}
+		}
+	}
+
+	@media (max-width: $md) {
+		&__item {
+			@include grid(1fr, auto);
+			@include gap(30px, 0);
+		}
+
+		&__item-pic {
+			width: 100%;
+
+			img {
+				max-width: 350px;
+			}
+		}
+
+		&__button {
+			max-width: none;
+			width: calc(100% - 50px);
+		}
+	}
+
+	@media (max-width: $sm) {
+		&__item-pic {
+			width: calc(100% - 50px);
+			padding: 0 25px;
+
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+}

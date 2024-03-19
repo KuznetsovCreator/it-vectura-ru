@@ -1,0 +1,327 @@
+.intro {
+  $intro: &;
+
+  @include flex(flex-start, center, column);
+  position: relative;
+  overflow: hidden;
+
+  background: url("/assets/images/common/intro/back-intro.jpg") no-repeat;
+  background-position: bottom;
+  background-size: cover;
+
+  // Background dark filter
+  &::before {
+    @include pseudo;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+
+  // Mods
+  &.type-products,
+  &.type-product {
+    background-position: center;
+  }
+
+  // Main container
+  &__main {
+    @include flex(space-between, center, row);
+    padding: 200px 0 100px 0;
+
+    min-height: fit-content;
+    height: auto;
+
+    #{$intro}.type-products & {
+      padding: 165px 0 55px 0;
+    }
+
+    #{$intro}.type-product & {
+      min-height: calc(100vh - 310px);
+    }
+  }
+  &__content {
+    @include flex(center, flex-start, column);
+    @include gap(50px, 0);
+
+    max-width: 500px;
+
+    #{$intro}.type-products & {
+      @include gap(30px, 0);
+      max-width: 550px;
+    }
+
+    #{$intro}.type-product & {
+      @include gap(60px, 0);
+      max-width: 550px;
+    }
+  }
+  &__text {
+    @include flex(center, flex-start, column);
+    @include gap(20px, 0);
+
+    #{$intro}.type-products &,
+    #{$intro}.type-product & {
+      @include gap(10px, 0);
+    }
+  }
+  &__description {
+    @include flex(center, flex-start, column);
+    @include gap(10px, 0);
+
+    #{$intro}.type-product & {
+      max-width: 500px;
+    }
+  }
+  &__buttons {
+    @include flex(flex-start, center, row);
+    @include gap(0, 20px);
+
+    #{$intro}.type-products & > .btn,
+    #{$intro}.type-product & > .btn {
+      min-width: 300px;
+    }
+  }
+
+  // Pictures
+  &__pic {
+    position: relative;
+    width: 400px;
+    height: 400px;
+
+    & > img {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -53%);
+
+      width: 630px;
+      object-fit: contain;
+    }
+  }
+  &__pic-mobile {
+    position: relative;
+    width: 100%;
+    height: 300px;
+
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      object-fit: contain;
+      height: 490px;
+    }
+  }
+
+  // Products catalog
+  &__products {
+    #{$intro}.type-product & {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  @media (max-width: $xl) {
+    &__pic {
+      width: 200px;
+      height: 200px;
+
+      & > img {
+        left: 20%;
+        width: 500px;
+      }
+    }
+  }
+  @media (max-width: $lg) {
+    &__pic {
+      display: none;
+    }
+
+    &__description {
+      max-width: none;
+    }
+  }
+  @media (max-width: $md) {
+    &__main {
+      min-height: fit-content;
+      height: auto;
+      padding: 120px 0 60px 0;
+
+      #{$intro}.type-products &,
+      #{$intro}.type-product & {
+        padding: 120px 0 30px 0;
+        min-height: fit-content;
+        height: auto;
+      }
+    }
+
+    &__content {
+      max-width: none;
+
+      #{$intro}.type-product & {
+        @include gap(30px, 0);
+        max-width: none;
+      }
+    }
+
+    &__text {
+      max-width: none;
+    }
+
+    &__products {
+      #{$intro}.type-product & {
+        display: grid;
+        visibility: visible;
+      }
+    }
+  }
+  @media (max-width: $sm) {
+    background-position: top;
+
+    &__buttons {
+      @include flex(flex-start, flex-start, column);
+      @include gap(15px, 0);
+      width: 100%;
+    }
+
+    &__pic-mobile {
+      display: flex;
+      visibility: visible;
+    }
+  }
+}
+.features-intro {
+  padding: 20px 0;
+  width: 100%;
+  z-index: 2;
+
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.53);
+
+  &__cards {
+    @include grid(repeat(4, 1fr), 1fr);
+    @include gap(0px, 35px);
+    justify-content: space-between;
+  }
+  &__card {
+    @include flex(flex-start, center, row);
+
+    & > img {
+      margin-left: -15px;
+    }
+  }
+
+  @media (max-width: $xl) {
+    &__cards {
+      align-items: flex-start;
+      @include gap(0px, 20px);
+    }
+    &__card > h2 {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: $lg) {
+    &__cards {
+      @include grid(repeat(2, auto), 1fr);
+      @include gap(30px, 90px);
+      justify-content: center;
+    }
+  }
+  @media (max-width: $md) {
+    &__cards {
+      @include gap(30px, 50px);
+    }
+  }
+  @media (max-width: $sm) {
+    padding: 25px 0;
+
+    &__cards {
+      @include grid(1fr, 1fr);
+      @include gap(0, 0);
+    }
+
+    &__card {
+      @include flex(flex-start, center, row);
+      @include gap(0, 10px);
+
+      & > img {
+        height: 80px;
+        margin-left: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+.products {
+  @include grid(repeat(3, 1fr), 1fr);
+  padding: 0;
+  overflow: hidden;
+
+  background-color: rgba(0, 0, 0, 0.53);
+  backdrop-filter: blur(10px);
+
+  border-radius: $radius-m $radius-m 0 0;
+  border: 1px $WHT solid;
+
+  &__item {
+    padding: 20px;
+    @include grid(1fr, auto);
+    @include gap(15px, 0);
+
+    cursor: pointer;
+    will-change: background-color;
+    transition: background-color $trans-3;
+    background: rgba(0, 0, 0, 0);
+
+    &:nth-child(2) {
+      border-left: 1px $WHT solid;
+      border-right: 1px $WHT solid;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.53);
+    }
+  }
+  &__header {
+    @include flex(space-between, center, row);
+  }
+  &__buttons {
+    @include flex(space-between, flex-end, row);
+
+    & > img {
+      width: 30px;
+      transform: rotate(-90deg);
+    }
+  }
+  @media (max-width: $md) {
+    @include grid(1fr, repeat(3, 1fr));
+
+    &__item {
+      @include gap(10px, 0);
+
+      &:nth-child(2) {
+        border-left: none;
+        border-right: none;
+        border-top: 1px $WHT solid;
+        border-bottom: 1px $WHT solid;
+      }
+    }
+    &__header > p {
+      font-size: 18px;
+    }
+  }
+}

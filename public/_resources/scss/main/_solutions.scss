@@ -1,0 +1,341 @@
+.solutions {
+
+	&__hangs {
+		position: relative;
+		@include flex(flex-start, center, column);
+	}
+
+	&__decisions {
+		@include flex(flex-start, center, column);
+		@include gap(30px, 0);
+		margin-top: 10px;
+	}
+
+	&__mob-dec {
+		display: none;
+		visibility: hidden;
+	}
+
+	@media (max-width: $xl) {
+		&__hangs {
+			display: none;
+		}
+
+		&__decisions {
+			margin-top: 0;
+		}
+	}
+
+	@media (max-width: $md) {
+		@include gap(30px, 0);
+
+		&__decisions {
+			display: none;
+			visibility: hidden;
+		}
+
+		&__mob-dec {
+			display: grid;
+			visibility: visible;
+		}
+	}
+}
+
+.points {
+	@include grid(repeat(4, auto), 1fr);
+	@include gap(0, 30px);
+	justify-content: space-between;
+	align-items: flex-start;
+
+	&__item>img {
+		height: 50px;
+	}
+
+	@media (max-width: $lg) {
+		@include grid(repeat(4, 1fr), 1fr);
+		@include gap(0, 30px);
+	}
+
+	@media (max-width: $md) {
+		@include grid(repeat(2, 1fr), 1fr);
+		@include gap(30px, 30px);
+
+		&__item>img {
+			height: 45px;
+		}
+	}
+
+	@media (max-width: $sm) {
+		@include grid(repeat(2, auto), 1fr);
+		@include gap(20px, 20px);
+
+		&__item {
+			@include flex(flex-start, center, row);
+			@include gap(0, 10px);
+
+			&:nth-child(1) {
+				order: 3;
+			}
+
+			&:nth-child(2) {
+				order: 4;
+			}
+
+			&:nth-child(3) {
+				order: 1;
+			}
+
+			&:nth-child(4) {
+				order: 2;
+			}
+
+			&>img {
+				margin-bottom: -5px;
+				height: 35px;
+			}
+		}
+	}
+}
+
+.decisions {
+	$decisions: &;
+
+	@include grid(repeat(2, 1fr), 1fr);
+	@include gap(0, 50px);
+	align-items: flex-start;
+
+	// Product cards
+	&__cards {
+		@include grid(1fr, 1fr);
+		@include gap(30px, 0);
+	}
+
+	&__card {
+		@include flex(center, center, column);
+		@include gap(40px, 0);
+		border-radius: $radius-m;
+		padding: 25px;
+
+		width: calc(100% - 50px);
+
+		background-color: $WHT;
+		box-shadow: $card-shadow;
+
+		cursor: pointer;
+		will-change: box-shadow, background-color;
+		transition: box-shadow $trans-2, background-color $trans-2;
+
+		&:hover {
+			box-shadow: $card-shadow-hover;
+		}
+
+		&.active {
+			background-color: $ACD;
+		}
+	}
+
+	&__card-row {
+		width: 100%;
+		@include flex(space-between, flex-end, row);
+		pointer-events: none;
+
+		&>p {
+			will-change: color;
+			transition: color $trans-2;
+		}
+
+		#{$decisions}__card.active &>p {
+			color: $WHT;
+		}
+	}
+
+	&__card-title {
+		font-size: 55px;
+		font-weight: 700;
+		line-height: 100%;
+		text-transform: uppercase;
+
+		color: $BLA;
+
+		will-change: color;
+		transition: color $trans-2;
+
+		#{$decisions}__card.active & {
+			color: $WHT;
+		}
+	}
+
+	&__card-icon {
+		width: 40px;
+		height: 40px;
+
+		will-change: transform;
+		transition: transform $trans-3 ease-in-out 0s;
+		transform: rotate(-90deg);
+
+		background: url('/resources/images/icons/btn-down-dark.svg') center no-repeat;
+		background-size: 100%;
+		background-position: center;
+
+		#{$decisions}__card.active & {
+			background: url('/resources/images/icons/btn-down-light.svg') center no-repeat;
+			background-size: 100%;
+			background-position: center;
+			transform: rotate(90deg);
+		}
+	}
+
+	// Product cards content
+	&__content {
+		@include grid(1fr, 1fr);
+	}
+
+	&__features {
+		@include grid(1fr, 1fr);
+		@include gap(15px, 0);
+
+		display: none;
+		visibility: hidden;
+
+		&.active {
+			display: grid;
+			visibility: visible;
+		}
+	}
+
+	&__features-points {
+		@include grid(1fr, 1fr);
+		@include gap(30px, 0);
+	}
+
+	&__feature {
+		@include flex(flex-start, flex-start, row);
+		@include gap(0, 10px);
+
+		&>img {
+			width: 25px;
+		}
+	}
+
+	@media (max-width: $xl) {
+		&__card-title {
+			font-size: 50px;
+		}
+	}
+
+	@media (max-width: $lg) {
+		@include gap(0, 30px);
+
+		&__card-title {
+			font-size: 40px;
+		}
+	}
+
+	@media (max-width: $md) {
+		display: none;
+		visibility: hidden;
+	}
+}
+
+.mob-dec {
+	$mob-dec: &;
+
+	@include grid(1fr, 1fr);
+	@include gap(20px, 0);
+
+	&__item {
+		@include grid(1fr, 1fr);
+		@include gap(0, 0);
+
+		box-shadow: $card-shadow;
+		border-radius: $radius-m;
+		overflow: hidden;
+	}
+
+	&__features {
+		@include grid(1fr, 1fr);
+		@include gap(30px, 0);
+
+		background-color: $WHT;
+		padding: 25px;
+	}
+
+	&__feature {
+		@include flex(flex-start, flex-start, row);
+		@include gap(0, 10px);
+
+		margin-left: -5px;
+
+		&>img {
+			width: 25px;
+		}
+	}
+
+	&__card {
+		@include flex(center, flex-start, column);
+		padding: 25px;
+
+		width: calc(100% - 50px);
+
+		background-color: $WHT;
+
+		cursor: pointer;
+		will-change: background-color;
+		transition: background-color $trans-2;
+
+		&.active {
+			background-color: $ACD;
+
+			&>p {
+				color: $WHT;
+			}
+		}
+	}
+
+	&__title {
+		@include flex(space-between, flex-start, row);
+		width: 100%;
+
+		min-height: 75px;
+
+		font-size: 35px;
+		font-weight: 700;
+		line-height: 100%;
+		text-transform: uppercase;
+
+		color: $BLA;
+
+		will-change: color, min-height;
+		transition: color $trans-3, min-height $trans-3;
+
+		#{$mob-dec}__card.active & {
+			color: $WHT;
+
+			min-height: 45px;
+		}
+	}
+
+	&__icon {
+		width: 35px;
+		height: 35px;
+
+		will-change: transform;
+		transition: transform $trans-3 ease-in-out 0s;
+
+		background: url('/resources/images/icons/btn-down-dark.svg') center no-repeat;
+		background-size: 100%;
+		background-position: center;
+
+		#{$mob-dec}__card.active & {
+			background: url('/resources/images/icons/btn-down-light.svg') center no-repeat;
+			background-size: 100%;
+			background-position: center;
+			transform: rotate(180deg);
+		}
+	}
+
+	@media (min-width: $md) {
+		display: none;
+		visibility: hidden;
+	}
+}

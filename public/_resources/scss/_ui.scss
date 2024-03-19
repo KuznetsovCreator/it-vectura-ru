@@ -1,0 +1,395 @@
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+	margin: 0;
+	padding: 0;
+
+	line-height: 140%;
+	font-weight: 500;
+
+	color: $BLA;
+
+	// Font size
+	&.fs {
+		font-size: 12px;
+	}
+
+	&.fxs {
+		font-size: 14px;
+	}
+
+	&.fm {
+		font-size: 16px;
+	}
+
+	&.fl {
+		font-size: 18px;
+	}
+
+	&.fxl {
+		font-size: 22px;
+	}
+
+	// Font weight
+	&.wsb {
+		font-weight: 500;
+	}
+
+	&.wm {
+		font-weight: 600;
+	}
+
+	&.wb {
+		font-weight: 700;
+	}
+
+	// Text color
+	&.cbl {
+		color: $BLL;
+	}
+
+	&.cbm {
+		color: $BLM;
+	}
+
+	&.cw {
+		color: $WHT;
+	}
+
+	// Font types
+	&.up {
+		text-transform: uppercase;
+	}
+
+	&.link {
+		color: $ACD;
+		text-decoration: underline;
+		@include link-hover($ACM);
+
+		&.cw {
+			color: $WHT;
+			@include link-hover($WHT);
+		}
+	}
+
+	&>.span {
+		color: $BLL;
+	}
+
+	&>.span-dark {
+		color: $ACD;
+	}
+
+	@media (max-width: $md) {
+		&.fxs {
+			font-size: 14px;
+		}
+
+		&.fm {
+			font-size: 14px;
+		}
+
+		&.fl {
+			font-size: 16px;
+		}
+
+		&.fxl {
+			font-size: 18px;
+		}
+	}
+}
+
+h1,
+h2 {
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+h1 {
+	font-size: 30px;
+	line-height: 130%;
+	color: $WHT;
+
+	@media (max-width: $md) {
+		font-size: 24px;
+	}
+}
+
+h2 {
+	font-size: 26px;
+
+	@media (max-width: $md) {
+		font-size: 22px;
+	}
+}
+
+// Titles
+.entry {
+	@include flex(center, flex-start, column);
+	@include gap(8px, 0);
+
+	&__title,
+	&__line,
+	&__description {
+		width: 100%;
+	}
+
+	&__line {
+		margin: 0;
+		background-color: $BLA;
+	}
+
+	&__description {
+		@include flex(flex-start, flex-start, column);
+
+		max-width: 800px;
+	}
+
+	&__content {
+		@include flex(flex-start, flex-start, row);
+		@include gap(0, 30px);
+	}
+
+	&__content-description {
+		@include flex(flex-start, flex-start, column);
+		@include gap(8px, 0);
+	}
+
+	&__icon {
+		img {
+			height: 100%;
+			max-height: 90px;
+		}
+	}
+
+	@media(max-width: $md) {
+		&__content {
+			@include flex(flex-start, center, column);
+			@include gap(50px, 0);
+		}
+	}
+}
+
+// Buttons
+.btn {
+	@include flex(center, center, row);
+	padding: 0;
+	margin: 0;
+
+	height: 46px;
+	width: 100%;
+
+	border-radius: $radius-s;
+	border: none;
+	outline: none;
+
+	cursor: pointer;
+	will-change: border-radius, background-color;
+	transition: border-radius $trans-2, background-color $trans-2;
+
+	color: $WHT;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 100%;
+
+	a {
+		@include flex(center, center, row);
+		width: 100%;
+		height: 100%;
+
+		color: $WHT;
+		font-size: 15px;
+		font-weight: 600;
+		text-align: center;
+		line-height: 100%;
+
+		background-color: transparent;
+	}
+
+	// Element states
+	&:hover {
+		border-radius: $radius-l;
+	}
+
+	&:active {
+		border-radius: $radius-s;
+	}
+
+	// Element types
+	&__accent {
+		background: $btn-gradient;
+		white-space: nowrap;
+
+		min-width: 230px;
+	}
+
+	&__fill {
+		height: auto;
+		padding: 13.5px 25px;
+		line-height: 130%;
+		background-color: $ACM;
+
+		&:hover {
+			background-color: $ACD;
+		}
+	}
+
+	&__clear {
+		border: 2px $WHT solid;
+
+		height: 42px;
+		min-width: 240px;
+
+		background-color: rgba(236, 236, 236, 0.1);
+		backdrop-filter: blur(10px);
+
+		&:hover {
+			background-color: rgba(236, 236, 236, 0);
+		}
+	}
+
+	@media (max-width: $md) {
+
+		&__accent {
+			padding: 0 30px;
+			min-width: fit-content;
+		}
+
+		&__clear {
+			min-width: fit-content;
+			width: calc(100% - 2px);
+
+			a {
+				padding: 0 29px;
+			}
+		}
+	}
+}
+
+// Forms
+.form {
+	@include flex(flex-start, flex-start, column);
+	@include gap(30px, 0);
+
+	&__main,
+	&__commerce-info {
+		width: 100%;
+	}
+
+	&__main {
+		@include grid(1fr, 1fr);
+		@include gap(15px, 0);
+		width: 100%;
+	}
+
+	&__grid {
+		@include grid(repeat(2, 1fr), auto);
+		@include gap(15px, 15px);
+	}
+
+	&__inp {
+		height: 46px;
+		padding: 0 15px;
+
+		background-color: transparent;
+		border-radius: $radius-s;
+		border: $bla-border;
+		outline: none;
+
+		font-size: 15px;
+		font-weight: 500;
+		color: $BLA;
+
+		&::placeholder {
+			color: $BLA;
+		}
+	}
+
+	&__area {
+		height: 92px;
+		padding: 15px;
+		resize: none;
+
+		background-color: transparent;
+		border-radius: $radius-s;
+		border: $bla-border;
+		outline: none;
+
+		font-size: 15px;
+		font-weight: 500;
+		color: $BLA;
+
+		&::placeholder {
+			color: $BLA;
+		}
+	}
+
+	.form-input.error {
+			border: 1px #E32636 solid;
+
+			animation: shake .5s ease;
+
+			&::-webkit-input-placeholder {
+				color: #E32636;
+			}
+
+			&:-ms-input-placeholder {
+				color: #E32636;
+			}
+
+			&::-moz-placeholder {
+				color: #E32636;
+			}
+
+			&:-moz-placeholder {
+				color: #E32636;
+			}
+
+	}
+
+	&__commerce-info {
+		font-size: 12px;
+	}
+
+	@media (max-width: $md) {
+		@include gap(20px, 0);
+
+		&__main {
+			@include gap(10px, 0);
+		}
+
+		&__grid {
+			@include grid(1fr, 1fr);
+			@include gap(10px, 0);
+		}
+	}
+}
+
+@keyframes shake {
+	0% {
+		transform: translateX(-5px);
+	}
+
+	20% {
+		transform: translateX(5px);
+	}
+
+	40% {
+		transform: translateX(-5px);
+	}
+
+	60% {
+		transform: translateX(5px);
+	}
+
+	80% {
+		transform: translateX(-5px);
+	}
+
+	100% {
+		transform: translateX(5px);
+	}
+}

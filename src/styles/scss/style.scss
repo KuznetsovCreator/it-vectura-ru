@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+// Reset
+@import '_reset';
+
+// Settings and values
+@import '_mix-var';
+@import '_common';
+
+// Start page components
+@import 'components/_preloader';
+
+// Navigation components
+@import 'components/_header';
+@import 'components/_mobile';
+
+// Final page components
+@import 'components/_modal';
+@import 'components/_footer';
+
+// Main page components
+@import 'general/_intro';
+@import 'main/_about';
+@import 'main/_features';
+@import 'main/_cards';
+@import 'main/_system';
+@import 'main/_solutions';
+@import 'general/_request';
+@import 'main/_contacts';
+
+// Product page components
+@import 'products/_general-functionality';
+@import 'products/_catalog';

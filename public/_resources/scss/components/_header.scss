@@ -1,0 +1,414 @@
+.header {
+	$header: &;
+
+	@include flex (center, center, row);
+	z-index: 50;
+
+	will-change: background-color, height, border-bottom, backdrop-filter;
+	transition: background-color $trans-2, height $trans-2, border-bottom $trans-2, backdrop-filter $trans-2;
+
+	// Mods
+	&.theme-dark {
+		backdrop-filter: blur(10px);
+		background-color: rgba(0, 0, 0, 0.53);
+	}
+
+	&.theme-light {
+		backdrop-filter: none;
+		box-shadow: $card-shadow;
+		background-color: $GRY;
+	}
+
+	// Main container
+	&__body {
+		@include flex (space-between, center, row);
+	}
+
+	// Logos
+	&__logos {
+		@include flex(flex-start, center, row);
+		min-height: 50px;
+		max-height: 50px;
+		height: 100%;
+
+		will-change: max-height, min-height;
+		transition: max-height $trans-3, min-height $trans-3;
+
+		#{$header}.theme-dark & {
+			min-height: 42px;
+			max-height: 42px;
+		}
+	}
+
+	&__logo {
+		min-height: 50px;
+		max-height: 50px;
+
+		will-change: max-height, min-height;
+		transition: max-height $trans-2, min-height $trans-2;
+
+		&_theme-light {
+			display: flex;
+			visibility: visible;
+			pointer-events: all;
+		}
+
+		&_theme-dark {
+			display: none;
+			visibility: hidden;
+			pointer-events: none;
+		}
+
+		#{$header}.theme-dark &,
+		#{$header}.theme-light & {
+			min-height: 42px;
+			max-height: 42px;
+		}
+
+		#{$header}.theme-light & {
+			&_theme-light {
+				display: none;
+				visibility: hidden;
+				pointer-events: none;
+			}
+
+			&_theme-dark {
+				display: flex;
+				visibility: visible;
+				pointer-events: all;
+			}
+		}
+	}
+
+	// Contacts
+	&__contacts {
+		@include flex(space-between, flex-end, column);
+		min-height: 50px;
+		max-height: 50px;
+
+		will-change: max-height, min-height;
+		transition: max-height $trans-2, min-height $trans-2;
+
+		#{$header}.theme-dark &,
+		#{$header}.theme-light & {
+			min-height: 42px;
+			max-height: 42px;
+		}
+	}
+
+	&__contact-link {
+		@include link-hover($BLL);
+		color: $WHT;
+
+		#{$header}.theme-light & {
+			@include link-hover($ACD);
+			color: $BLA;
+		}
+	}
+
+	// Navigation
+	&__nav {
+		@include flex(center, flex-start, row);
+		min-height: 55px;
+
+		will-change: min-height;
+		transition: min-height $trans-2;
+
+		#{$header}.theme-dark &,
+		#{$header}.theme-light & {
+			min-height: 0;
+		}
+	}
+
+	&__nav-body {
+		@include flex(center, center, row);
+		@include gap(0, 30px);
+	}
+
+	// Main navigation catalog
+	&__item>a {
+		@include link-hover($BLL);
+
+		#{$header}.theme-light & {
+			color: $BLA;
+			@include link-hover($ACD);
+		}
+	}
+
+	&__item-category {
+		position: relative;
+
+		p {
+			position: relative;
+			@include flex(center, center, row);
+			@include gap(0, 5px);
+
+			@include link-hover($WHT);
+			cursor: pointer;
+
+			&::after {
+				@include pseudo;
+				top: 100%;
+				left: 0;
+				right: 0;
+
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		#{$header}.theme-light &>p {
+			color: $BLA;
+			@include link-hover($BLA);
+		}
+	}
+
+	// Sub-category catalog
+	&__category {
+		position: absolute;
+		top: 28px;
+		left: 0;
+
+		overflow: hidden;
+		width: max-content;
+
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+
+		border-radius: $radius-s;
+		border: 1px $WHT solid;
+		background-color: rgba(236, 236, 236, 0.3);
+
+		will-change: opacity, visibility, background-color;
+		transition: opacity $trans-2, visibility $trans-2, background-color $trans-2;
+
+		#{$header}__item-category:hover & {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: all;
+		}
+
+		#{$header}.theme-dark & {
+			background-color: rgba(0, 0, 0, 0.7);
+		}
+
+		#{$header}.theme-light & {
+			border: 1px $BLA solid;
+			background-color: $GRY;
+			box-shadow: $card-shadow;
+		}
+	}
+
+	&__category-item {
+		@include flex(flex-start, center, row);
+
+		will-change: background-color;
+		transition: background-color $trans-2;
+
+		&_title {
+			background-color: rgba(236, 236, 236, 0.2);
+			border-bottom: 1px $WHT solid;
+		}
+
+		a {
+			@include link-hover($WHT);
+			width: 100%;
+			padding: 14px;
+		}
+
+		&:hover {
+			background-color: rgba(236, 236, 236, 0.4);
+		}
+
+		#{$header}.theme-dark & {
+			&_title {
+				background-color: rgba(236, 236, 236, 0.1);
+			}
+
+			&:hover {
+				background-color: rgba(236, 236, 236, 0.2);
+			}
+		}
+
+		#{$header}.theme-light & {
+			&_title {
+				background-color: transparent;
+				border-bottom: 1px $BLA solid;
+			}
+
+			a {
+				@include link-hover($BLA);
+				color: $BLA;
+			}
+
+			&:hover {
+				background-color: $WHT;
+			}
+		}
+	}
+
+	&__open {
+		position: relative;
+		border-radius: 50%;
+
+		width: 13px;
+		height: 13px;
+
+		background: url('/resources/images/icons/icon-down-light.svg') center no-repeat;
+		background-size: 100%;
+
+		will-change: background-color, box-shadow;
+		transition: background-color $trans-2, box-shadow $trans-2;
+
+		&::before {
+			@include pseudo;
+			top: 50%;
+			left: 50%;
+
+			will-change: opacity;
+			transition: opacity $trans-2;
+			transform: translate(-50%, -50%);
+
+			width: 1px;
+			height: 100%;
+
+			opacity: 0;
+			background: $WHT;
+		}
+
+		#{$header}__item-category:hover & {
+			background-color: $WHT;
+
+			-webkit-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0.3);
+			-moz-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0.3);
+			box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0.3);
+
+			&::before {
+				opacity: 1;
+				transform: translate(-50%, 50%);
+			}
+
+			#{$header}.theme-light & {
+				background-color: $BLA;
+
+				-webkit-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0);
+				-moz-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0);
+				box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0);
+			}
+		}
+
+		#{$header}.theme-light & {
+			background: url('/resources/images/icons/icon-down-dark.svg') center no-repeat;
+			background-size: 90%;
+
+			&::before {
+				background: $BLA;
+			}
+		}
+	}
+
+	// Mobile buttons
+	&__mobile {
+		@include flex(center, center, row);
+		width: 40px;
+		height: 40px;
+
+		border: 1px $WHT solid;
+		border-radius: $radius-s;
+
+		backdrop-filter: blur(10px);
+		background-color: rgba(0, 0, 0, 0.53);
+
+		cursor: pointer;
+		display: none;
+		visibility: hidden;
+
+		will-change: border, backdrop-filter, background-color;
+		transition: border $trans-2, backdrop-filter $trans-2, background-color $trans-2;
+
+		#{$header}.theme-light & {
+			border: 1px $BLA solid;
+			backdrop-filter: none;
+			background-color: transparent;
+		}
+	}
+
+	&__mobile-burger {
+		width: 20px;
+		height: 20px;
+		pointer-events: none;
+
+		&_theme-light {
+			display: flex;
+			visibility: visible;
+		}
+
+		&_theme-dark {
+			display: none;
+			visibility: hidden;
+		}
+
+		#{$header}.theme-light & {
+			&_theme-light {
+				display: none;
+				visibility: hidden;
+			}
+
+			&_theme-dark {
+				display: flex;
+				visibility: visible;
+			}
+		}
+	}
+
+	@media (max-width: $xl) {
+		&__nav-body {
+			@include gap(0, 20px);
+		}
+	}
+
+	@media (max-width: $lg) {
+		&__nav {
+			display: none;
+			pointer-events: none;
+			visibility: hidden;
+		}
+
+		&__contacts {
+			display: none;
+			pointer-events: none;
+			visibility: hidden;
+		}
+
+		&__mobile {
+			display: flex;
+			visibility: visible;
+		}
+	}
+
+	@media (max-width: $md) {
+
+		&__logos,
+		&__logo {
+			min-height: 35px;
+			max-height: 35px;
+
+			#{$header}.theme-dark &,
+			#{$header}.theme-light & {
+				min-height: 35px;
+				max-height: 35px;
+			}
+		}
+
+		&__mobile {
+			width: 35px;
+			height: 35px;
+		}
+
+		&__mobile-burger {
+			width: 17px;
+			height: 17px;
+		}
+	}
+}

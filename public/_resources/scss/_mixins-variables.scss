@@ -1,0 +1,93 @@
+// Color pallete
+$WHT: #FFFFFF;
+$GRY: #ECECEC;
+$GRD: #363636;
+$BLA: #232323;
+
+$ACL: #3C84C6;
+$ACM: #4B60CC;
+$ACD: #384FCA;
+
+$BLL: #00B2FF;
+$BLM: #012e71;
+$BLD: #00245B;
+
+$PRL: #A834D0;
+$PRD: #8800B8;
+$PNL: #CB416A;
+$PND: #99005C;
+$ORN: #D47300;
+
+// Breakpoints
+$xl: 1200px;
+$lg: 950px;
+$md: 750px;
+$sm: 550px;
+$xsm: 400px;
+
+// UI Variables
+$radius-s: 10px;
+$radius-m: 15px;
+$radius-l: 20px;
+
+// Shadows
+$bla-border: 1px $BLA solid;
+$card-shadow: rgba(0, 0, 0, 0.15) 3px 3px 5.5px;
+$card-shadow-hover: rgba(0, 0, 0, 0.2) 3px 3px 5.5px;
+
+// Transitions
+$trans-2: .2s ease-in-out 0s;
+$trans-3: .3s ease-in-out 0s;
+$trans-4: .4s ease-in-out 0s;
+$trans-5: .5s ease-in-out 0s;
+
+// Gradients
+$btn-gradient: linear-gradient(125deg, rgba(12, 105, 255, 1) 30%, rgba(48, 205, 255, 1) 100%);
+$card-gradient: linear-gradient(90deg, #384FCA 0%, #445EE9 100%);
+
+// Mixins
+@mixin flex($jc: center, $ai: center, $fd: column) {
+	display: flex;
+	justify-content: $jc;
+	align-items: $ai;
+	flex-direction: $fd;
+}
+
+@mixin grid($gtc: auto, $gtr: auto) {
+	display: grid;
+	grid-template-columns: $gtc;
+	grid-template-rows: $gtr;
+}
+
+@mixin gap($rg, $cg) {
+	row-gap: $rg;
+	column-gap: $cg;
+}
+
+@mixin link-hover ($cl) {
+	cursor: pointer;
+
+	will-change: color;
+	transition: color $trans-2;
+
+	&:hover {
+		color: $cl;
+	}
+}
+
+@mixin link-back ($cl) {
+	cursor: pointer;
+
+	will-change: background-color;
+	transition: background-color $trans-3;
+
+	&:hover {
+		background-color: $cl;
+	}
+}
+
+@mixin pseudo($cn: '', $ds: flex, $ps: absolute) {
+	content: $cn;
+	display: $ds;
+	position: $ps;
+}

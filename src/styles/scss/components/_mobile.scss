@@ -1,0 +1,257 @@
+.mobile {
+  $mobile: &;
+
+  @include flex(flex-start, center, column);
+  z-index: 60;
+
+  visibility: hidden;
+  transform: translateX(100%);
+  pointer-events: none;
+
+  background-color: #04000f;
+
+  will-change: transform, visibility;
+  transition: transform $trans-3, visibility $trans-3;
+
+  // Mods
+  &.open {
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
+  // Main container
+  &__body {
+    height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    padding: 30px;
+
+    @include flex(flex-start, center, column);
+  }
+
+  // Separator
+  &__hr {
+    width: 100%;
+    margin: 20px 0 !important;
+  }
+
+  // Header
+  &__head {
+    @include flex(flex-end, center, row);
+    width: 100%;
+  }
+  &__button {
+    @include flex(center, center, row);
+    padding: 0;
+    margin: 0;
+
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+
+    img {
+      width: 22px;
+      height: 22px;
+
+      pointer-events: none;
+    }
+  }
+
+  // Content wrapper
+  &__content {
+    @include grid(1fr, auto);
+    @include gap(0, 0);
+    width: 100%;
+    height: max-content;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // Navigation
+  &__nav,
+  &__com,
+  &__contacts,
+  &__partners {
+    @include grid(1fr, auto);
+    @include gap(0, 0);
+    margin: 0;
+    padding: 0;
+  }
+  &__item {
+    @include flex(center, flex-start, column);
+    height: 50px;
+
+    color: $WHT;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__open {
+    @include flex(center, center, row);
+    position: relative;
+    height: 15px;
+    width: 15px;
+
+    pointer-events: none;
+
+    &::before {
+      @include pseudo;
+      @include flex(center, center, row);
+      top: 20%;
+
+      border-style: solid;
+      border-width: 1.5px 1.5px 0 0;
+      border-color: $WHT;
+
+      height: 10px;
+      width: 10px;
+
+      will-change: transform, top;
+      transition: transform $trans-3, top $trans-3;
+      transform: rotate(45deg);
+
+      #{$mobile}__item.open & {
+        top: 0;
+        transform: rotate(135deg);
+      }
+
+      .lang-switch.open & {
+        top: 0;
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  // Commerce info part
+  &__com-item {
+    @include flex(flex-start, center, row);
+    @include gap(0, 10px);
+    height: 50px;
+
+    color: $WHT;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  // Contacts
+  &__contacts {
+    @include gap(30px, 0);
+  }
+  &__contacts-item {
+    @include flex(flex-start, flex-start, row);
+    @include gap(0, 12px);
+    width: 100%;
+
+    & > p {
+      @include flex(flex-start, center, row);
+      min-height: 20px;
+      height: fit-content;
+      max-height: max-content;
+      width: 100%;
+
+      color: $WHT;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    & > img {
+      pointer-events: none;
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  // Partners
+  &__partners {
+    @include gap(20px, 0);
+  }
+  &__partners-item {
+    @include flex(flex-start, center, row);
+    @include gap(0, 12px);
+
+    color: $WHT;
+    font-size: 16px;
+    height: 100%;
+    font-weight: 600;
+
+    & > img {
+      pointer-events: none;
+      height: 20px;
+    }
+  }
+
+  // Copyright
+  &__copyright {
+    text-align: center;
+    color: $GRY;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  @media (max-width: $lg) {
+    display: flex;
+  }
+  @media (min-width: $lg) {
+    display: none;
+  }
+}
+.sub-cat {
+  $sub-cat: &;
+
+  @include grid(1fr, auto);
+  min-height: 50px;
+  height: auto;
+
+  &__title {
+    @include flex(space-between, center, row);
+    pointer-events: none;
+    padding: 0;
+    margin: 0;
+
+    height: 50px;
+
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+
+    color: $WHT;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__list {
+    @include grid(1fr, 1fr);
+
+    opacity: 0;
+    max-height: 0px;
+    visibility: hidden;
+    pointer-events: none;
+
+    will-change: max-height, opacity, visibility;
+    transition: max-height $trans-4, opacity $trans-4, visibility $trans-4;
+
+    #{$sub-cat}.open & {
+      max-height: 1000px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    & > a {
+      @include flex(flex-start, center, row);
+      height: 45px;
+      color: $WHT;
+      font-size: 14px;
+      font-weight: 400;
+
+      border-bottom: 1px $BLA solid;
+
+      &:nth-last-child(1) {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<article class="content__request request container" id="request">
+    <div class="request__card">
+        <!-- Title -->
+        <div class="request__title title">
+            <h2 class="wow animate__animated animate__fadeInUp">Свяжитесь с нами</h2>
+            <hr>
+            <p class="fl">Будем рады ответить на ваш вопрос</p>
+        </div>
+        <!-- Content -->
+        <form class="request__main form" method="POST" enctype="multipart/form-data">
+            <div class="form__main">
+                <!-- Main inputs -->
+                <input name="clientName" type="text" class="form__inp form-input _req" placeholder="Ваше имя">
+                <div class="form__grid">
+                    <input name="clientPhone" type="tel" class="form__inp form-input _req" placeholder="Телефон">
+                    <input name="clientMail" type="email" class="form__inp form-input _req _email" placeholder="E-mail">
+                    <input name="clientCompany" type="text" class="form__inp form-input _req" placeholder="Компания">
+                    <input name="clientPosition" type="text" class="form__inp form-input _req" placeholder="Должность">
+                </div>
+                <!-- Question input -->
+                <textarea name="clientRequest" class="form__area form-input" maxlength="370" placeholder="Ваш вопрос"></textarea>
+                <!-- Send button -->
+                <input type="submit" value="Отправить" class="btn btn__fill form-button">
+            </div>
+            <p class="form__commerce-info">
+                Нажимая на кнопку *Отправить*, даю согласие на
+                <a href="/documents/privacy-policy.pdf" target="_blank" class="link">обработку своих персональных данных</a>
+            </p>
+        </form>
+    </div>
+</article>

@@ -1,0 +1,28 @@
+.preloader {
+  background-color: #04000f;
+  overflow: hidden;
+  position: fixed;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+
+  @include flex(center, center, column);
+
+  // Mods
+  &.hidden {
+    visibility: hidden;
+  }
+
+  &__inner {
+    @include flex(center, center, column);
+    @include gap(15px, 0);
+  }
+
+  &__pic {
+    width: 400px;
+  }
+
+  @media (max-width: $sm) {
+    &__pic {
+      width: 300px;
+    }
+  }
+}

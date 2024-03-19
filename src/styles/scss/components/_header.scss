@@ -1,0 +1,376 @@
+.header {
+	$header: &;
+
+	@include flex(center, center, row);
+	z-index: 50;
+
+	will-change: background-color, height, border-bottom, backdrop-filter;
+	transition: background-color $trans-2, height $trans-2, border-bottom $trans-2,
+		backdrop-filter $trans-2;
+
+	// Mods
+	&.theme-dark {
+		backdrop-filter: blur(10px);
+		background-color: rgba(0, 0, 0, 0.53);
+	}
+	&.theme-light {
+		backdrop-filter: none;
+		box-shadow: $card-shadow;
+		background-color: $GRY;
+	}
+
+	// Main container
+	&__body {
+		@include flex(space-between, center, row);
+	}
+
+	// Logos
+	&__commerce {
+		@include flex(flex-start, flex-start, row);
+		height: fit-content;
+		width: fit-content;
+	}
+	&__logo {
+		min-height: 50px;
+		max-height: 50px;
+
+		min-width: 250px;
+		max-width: 250px;
+
+		will-change: max-height, min-height, min-width, max-width, fill;
+		transition: max-height $trans-3, min-height $trans-3, min-width $trans-3,
+			max-width $trans-3, fill $trans-3;
+
+		#{$header}.theme-dark & {
+			min-height: 42px;
+			max-height: 42px;
+
+			min-width: 210px;
+			max-width: 210px;
+		}
+
+		#{$header}.theme-light & #vector-logo-text {
+			fill: $GRD;
+		}
+	}
+
+	// Partners logo
+	&__partners {
+		@include flex(space-between, center, center);
+		@include gap(0, 15px);
+
+		& > img {
+			height: 50px;
+			width: auto;
+		}
+	}
+	&__skolkovo {
+		@include flex(center, center, column);
+		@include gap(4px, 0px);
+		min-height: 50px;
+		max-height: 50px;
+
+		& > img {
+			height: 25px;
+			pointer-events: none;
+		}
+
+		& > img.skolkovo-light {
+			display: block;
+		}
+		& > img.skolkovo-dark {
+			display: none;
+		}
+
+		#{$header}.theme-dark & {
+			min-height: 42px;
+			max-height: 42px;
+
+			& > img.skolkovo-light {
+				display: block;
+			}
+			& > img.skolkovo-dark {
+				display: none;
+			}
+		}
+
+		#{$header}.theme-light & {
+			fill: $GRD;
+
+			& > img.skolkovo-light {
+				display: none;
+			}
+			& > img.skolkovo-dark {
+				display: block;
+			}
+		}
+	}
+
+	// Navigation
+	&__nav {
+		@include flex(center, flex-start, row);
+		min-height: 55px;
+
+		will-change: min-height;
+		transition: min-height $trans-2;
+
+		#{$header}.theme-dark &,
+		#{$header}.theme-light & {
+			min-height: 0;
+		}
+	}
+	&__nav-body {
+		@include flex(center, center, row);
+		@include gap(0, 30px);
+	}
+
+	// Main navigation catalog
+	&__item > a {
+		@include link-hover($BLL);
+
+		#{$header}.theme-light & {
+			color: $BLA;
+			@include link-hover($ACD);
+		}
+	}
+	&__item-category {
+		position: relative;
+
+		p {
+			position: relative;
+			@include flex(center, center, row);
+			@include gap(0, 5px);
+
+			@include link-hover($WHT);
+			cursor: pointer;
+
+			&::after {
+				@include pseudo;
+				top: 100%;
+				left: 0;
+				right: 0;
+
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		#{$header}.theme-light & > p {
+			color: $BLA;
+			@include link-hover($BLA);
+		}
+	}
+
+	// Sub-category catalog
+	&__category {
+		position: absolute;
+		top: 28px;
+		left: 0;
+
+		overflow: hidden;
+		width: max-content;
+
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+
+		border-radius: $radius-s;
+		border: 1px $WHT solid;
+		background-color: rgba(236, 236, 236, 0.3);
+
+		will-change: opacity, visibility, background-color;
+		transition: opacity $trans-2, visibility $trans-2, background-color $trans-2;
+
+		#{$header}__item-category:hover & {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: all;
+		}
+
+		#{$header}.theme-dark & {
+			background-color: rgba(0, 0, 0, 0.7);
+		}
+
+		#{$header}.theme-light & {
+			border: 1px $BLA solid;
+			background-color: $GRY;
+			box-shadow: $card-shadow;
+		}
+	}
+	&__category-item {
+		@include flex(flex-start, center, row);
+
+		will-change: background-color;
+		transition: background-color $trans-2;
+
+		&_title {
+			background-color: rgba(236, 236, 236, 0.2);
+			border-bottom: 1px $WHT solid;
+		}
+
+		a {
+			@include link-hover($WHT);
+			width: 100%;
+			padding: 14px;
+		}
+
+		&:hover {
+			background-color: rgba(236, 236, 236, 0.4);
+		}
+
+		#{$header}.theme-dark & {
+			&_title {
+				background-color: rgba(236, 236, 236, 0.1);
+			}
+
+			&:hover {
+				background-color: rgba(236, 236, 236, 0.2);
+			}
+		}
+
+		#{$header}.theme-light & {
+			&_title {
+				background-color: transparent;
+				border-bottom: 1px $BLA solid;
+			}
+
+			a {
+				@include link-hover($BLA);
+				color: $BLA;
+			}
+
+			&:hover {
+				background-color: $WHT;
+			}
+		}
+	}
+	&__open {
+		position: relative;
+		border-radius: 50%;
+
+		width: 13px;
+		height: 13px;
+
+		background: url('/assets/images/icons/icon-down-light.svg') center no-repeat;
+		background-size: 100%;
+
+		will-change: background-color, box-shadow;
+		transition: background-color $trans-2, box-shadow $trans-2;
+
+		&::before {
+			@include pseudo;
+			top: 50%;
+			left: 50%;
+
+			will-change: opacity;
+			transition: opacity $trans-2;
+			transform: translate(-50%, -50%);
+
+			width: 1px;
+			height: 100%;
+
+			opacity: 0;
+			background: $WHT;
+		}
+		#{$header}__item-category:hover & {
+			background-color: $WHT;
+
+			-webkit-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0.3);
+			-moz-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0.3);
+			box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0.3);
+
+			&::before {
+				opacity: 1;
+				transform: translate(-50%, 50%);
+			}
+
+			#{$header}.theme-light & {
+				background-color: $BLA;
+
+				-webkit-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0);
+				-moz-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0);
+				box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0);
+			}
+		}
+		#{$header}.theme-light & {
+			background: url('/assets/images/icons/icon-down-dark.svg') center
+				no-repeat;
+			background-size: 90%;
+
+			&::before {
+				background: $BLA;
+			}
+		}
+	}
+
+	// Mobile buttons
+	&__mobile {
+		@include flex(center, center, row);
+		width: 40px;
+		height: 40px;
+
+		cursor: pointer;
+		display: none;
+		visibility: hidden;
+
+		& > svg {
+			height: 100%;
+			width: 100%;
+
+			& > #vector-mobile-burger {
+				will-change: fill;
+				transition: fill $trans-2;
+			}
+		}
+		&:active > svg > #vector-mobile-burger {
+			fill: $BLL;
+		}
+		#{$header}.theme-light & svg > #vector-mobile-burger {
+			fill: $GRD;
+		}
+	}
+
+	@media (max-width: $xl) {
+		&__nav-body {
+			@include gap(0, 20px);
+		}
+	}
+	@media (max-width: $lg) {
+		&__nav {
+			display: none;
+			pointer-events: none;
+			visibility: hidden;
+		}
+		&__partners {
+			display: none;
+			pointer-events: none;
+			visibility: hidden;
+		}
+		&__mobile {
+			display: flex;
+			visibility: visible;
+		}
+	}
+	@media (max-width: $md) {
+		&__logo {
+			min-height: 32px;
+			max-height: 32px;
+
+			min-width: 160px;
+			max-width: 160px;
+
+			#{$header}.theme-dark &,
+			#{$header}.theme-light & {
+				min-height: 32px;
+				max-height: 32px;
+
+				min-width: 160px;
+				max-width: 160px;
+			}
+		}
+		&__mobile {
+			width: 35px;
+			height: 35px;
+		}
+	}
+}

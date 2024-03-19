@@ -1,0 +1,72 @@
+.modal-window {
+	@include grid(1fr, 1fr);
+	@include gap(15px, 0);
+
+	padding: 25px;
+	background-color: $WHT;
+	border-radius: $radius-l;
+
+	&#modal-request {
+		@include gap(30px, 0);
+	}
+
+	&__header {
+		@include flex(space-between, center, row);
+		@include gap(0, 15px);
+		width: 100%;
+	}
+
+	&__close {
+		@include flex(center, center, row);
+		cursor: pointer;
+
+		img {
+			pointer-events: none;
+			height: 46px;
+			width: 46px;
+		}
+	}
+
+	&__content {
+		@include grid(1fr, auto);
+		@include gap(10px, 0);
+	}
+
+	&>table {
+		border-collapse: collapse;
+
+		thead {
+			background-color: $ACM;
+		}
+
+		td,
+		th {
+			font-size: 14px;
+			text-align: left;
+			border: 1px solid $BLA;
+			padding: 5px;
+		}
+
+		th {
+			color: $WHT;
+			font-weight: 600;
+		}
+	}
+
+	@media (max-width: $sm) {
+		padding: 20px;
+	}
+}
+
+.modal {
+	background-color: transparent !important;
+	box-shadow: none !important;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+	@media (max-width: $sm) {
+		margin: auto 15px !important;
+	}
+}

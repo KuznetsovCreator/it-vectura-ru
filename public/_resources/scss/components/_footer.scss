@@ -1,0 +1,110 @@
+footer {
+  $footer: &;
+  @include flex(center, center, column);
+
+  // Wrapper
+  &__container {
+    @include flex(space-between, space-between, row);
+    margin: 30px 0;
+  }
+  &__button {
+    width: 100%;
+    @include flex(center, center, row);
+
+    border-top: 1px $WHT solid;
+
+    & > a {
+      @include flex(center, center, row);
+      height: 50px;
+      width: 100%;
+
+      @include link-back($BLM);
+
+      & > img {
+        height: 25px;
+      }
+    }
+  }
+
+  // Columns
+  &__column {
+    @include flex(space-between, flex-start, column);
+    @include gap(30px, 0);
+
+    width: fit-content;
+
+    & a {
+      @include link-hover($BLL);
+    }
+  }
+  &__menu {
+    @include flex(center, flex-start, row);
+    @include gap(0, 25px);
+    width: fit-content;
+
+    & a {
+      @include link-hover($BLL);
+    }
+  }
+  &__contacts {
+    @include flex(flex-start, flex-start, column);
+    @include gap(10px, 0);
+  }
+
+  // Components
+  &__logo {
+    @include flex(flex-start, flex-start, column);
+
+    & > svg,
+    & > img {
+      height: 40px;
+      pointer-events: none;
+    }
+  }
+  &__link-version {
+    @include flex(flex-start, center, row);
+    @include gap(0, 5px);
+
+    & > svg > path {
+      will-change: stroke;
+      transition: stroke $trans-2;
+    }
+
+    &:hover,
+    & > a:hover {
+      & > svg > path {
+        stroke: $BLL;
+      }
+    }
+  }
+
+  @media (max-width: $xl) {
+    &__container {
+      @include flex(flex-start, center, column);
+      @include gap(50px, 0);
+    }
+    &__column {
+      @include flex(flex-start, center, column);
+      @include gap(15px, 0);
+      width: 100%;
+
+      text-align: center;
+    }
+    &__contacts {
+      @include flex(flex-start, center, column);
+    }
+  }
+  @media (max-width: $md) {
+    &__button {
+      & > a {
+        height: 70px;
+      }
+    }
+  }
+  @media (max-width: $sm) {
+    &__menu {
+      @include flex(flex-start, center, column);
+      @include gap(25px, 0);
+    }
+  }
+}

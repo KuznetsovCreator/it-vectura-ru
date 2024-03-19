@@ -1,0 +1,301 @@
+@charset "UTF-8";
+
+
+// Settings and values
+@import '_mixins-variables';
+@import '_ui';
+
+
+// Default settings
+html {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+
+	font-family: 'Montserrat', sans-serif;
+	color: $BLA;
+
+	scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+
+	will-change: background-color;
+	transition: background-color $trans-2;
+	background-color: #04000F;
+
+	// Mods
+	&.theme-light {
+		background-color: $GRY;
+
+		&::-webkit-scrollbar-thumb {
+			border: 3px $GRY solid;
+		}
+	}
+
+	// Page scrollbar
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $BLL;
+		border-radius: 10px;
+		border: 3px #04000F solid;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+	@media (max-width: $md) {
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+}
+.page {
+	position: relative;
+	overflow-x: hidden;
+	margin: 0 auto;
+	padding: 0;
+
+	// Mods
+	&.lock {
+		overflow: hidden;
+		touch-action: none;
+		-ms-touch-action: none;
+
+		.page__blackout {
+			opacity: 0.8;
+			pointer-events: all;
+			visibility: visible;
+		}
+	}
+
+	// Start page components
+	&__preloader {
+		width: 100%;
+		height: 100vh;
+
+		z-index: 500;
+	}
+	&__blackout {
+		position: fixed;
+		top: 0;
+		left: 0;
+
+		width: 100vw;
+		height: 100vh;
+
+		visibility: hidden;
+		pointer-events: none;
+		z-index: 55;
+
+		background-color: #000000;
+		opacity: 0;
+
+		cursor: pointer;
+		will-change: opacity, visibility;
+		transition: opacity $trans-3, visibility $trans-3;
+
+		@media (max-width: $lg) {
+			display: flex;
+		}
+
+		@media (min-width: $lg) {
+			display: none;
+		}
+	}
+
+	// Navigation components
+	&__header {
+		position: fixed;
+		left: 0;
+		top: 0;
+
+		height: 130px;
+		width: 100%;
+
+		&.theme-dark,
+		&.theme-light {
+			height: 75px;
+		}
+
+		@media (max-width: $md) {
+			height: 100px;
+
+			&.theme-dark,
+			&.theme-light {
+				height: 60px;
+			}
+		}
+	}
+	&__mobile {
+		position: fixed;
+		right: 0;
+		top: 0;
+
+		width: 370px;
+		max-width: 100%;
+		height: 100vh;
+
+		@media (max-width: $xsm) {
+			width: 345px;
+		}
+	}
+
+	// Main page content
+	&__content {
+		position: relative;
+		z-index: 1;
+
+		padding-top: 150px;
+
+		width: 100%;
+		min-height: 100vh;
+
+		@media (max-width: $md) {
+			padding-top: 100px;
+		}
+	}
+
+	// Final page components
+	&__footer {
+		position: static;
+		left: 0;
+		bottom: 0;
+
+		z-index: 1;
+
+		width: 100%;
+
+		background-color: $BLD;
+	}
+}
+.container {
+	margin: 0 auto;
+	position: relative;
+
+	display: flex;
+
+	max-width: 1100px;
+	width: 100%;
+
+	padding: 0 25px;
+
+	@media (max-width: $xl) {
+		max-width: 900px;
+	}
+
+	@media (max-width: $lg) {
+		max-width: 700px;
+	}
+
+	@media (max-width: $md) {
+		max-width: 500px;
+		padding: 0 20px;
+	}
+
+	@media (max-width: $sm) {
+		max-width: calc(100% - 30px);
+		padding: 0 15px;
+	}
+}
+
+
+// Start page components
+@import 'components/_preloader';
+
+
+// Navigation components
+@import 'components/_header';
+@import 'components/_mobile';
+
+
+// Final page components
+@import 'components/_modal';
+@import 'components/_footer';
+
+
+// Content settings
+.content {
+	background-color: $GRY;
+
+	&__default-section,
+	&__big-section {
+		@include flex(flex-start, center, column);
+	}
+
+	&__default-section {
+		@include gap(30px, 0);
+	}
+
+	&__big-section {
+		@include gap(50px, 0);
+	}
+
+	&__intro {
+		margin-top: -150px;
+		background-color: $BLA;
+	}
+
+	&__about,
+	&__cards,
+	&__system,
+	&__solutions,
+	&__request,
+	&__request.modal,
+	&__contacts,
+	&__catalog {
+		padding: 50px 0;
+	}
+
+	&__features {
+		padding: 50px 0 40px 0;
+	}
+
+	&__functionality {
+		padding: 50px 0 0 0;
+	}
+
+	@media (max-width: $md) {
+		&__intro {
+			margin-top: -100px;
+			background-color: $BLA;
+		}
+
+		&__about,
+		&__cards,
+		&__system,
+		&__solutions,
+		&__request,
+		&__request.modal,
+		&__contacts,
+		&__catalog {
+			padding: 40px 0;
+		}
+
+		&__features {
+			padding: 40px 0 30px 0;
+		}
+
+		&__functionality {
+			padding: 40px 0 0 0;
+		}
+	}
+}
+
+
+// Main page content
+@import 'common/_intro';
+@import 'main/_about';
+@import 'main/_features';
+@import 'main/_cards';
+@import 'main/_system';
+@import 'main/_solutions';
+@import 'common/_request';
+@import 'main/_contacts';
+
+
+// Product page content
+@import 'products/_general-functionality';
+@import 'products/_catalog';
